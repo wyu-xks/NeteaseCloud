@@ -1,6 +1,7 @@
 package com.wyuxks.neteasecloud.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,5 +23,11 @@ class RecommendFragment : BaseFragment() {
     override fun initView() {
 //        val xRecyclerView = rootView?.findViewById(R.id.xrv_recommend) as XRecyclerView
 
+    }
+
+    override fun loadData() {
+        Handler().postDelayed({
+            showContentView()
+        }, 1000)
     }
 }

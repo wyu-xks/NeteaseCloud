@@ -1,6 +1,7 @@
 package com.wyuxks.neteasecloud.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,5 +20,11 @@ class RightFragment : BaseFragment() {
     }
 
     override fun initView() {
+    }
+
+    override fun loadData() {
+        Handler().postDelayed({
+            showContentView()
+        }, 1000)
     }
 }

@@ -1,6 +1,7 @@
 package com.wyuxks.neteasecloud.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -38,6 +39,12 @@ class LeftFragment : BaseFragment() {
         tab_left.setupWithViewPager(vp_left)
         myFragmentPagerAdapter.notifyDataSetChanged()
 
+    }
+
+    override fun loadData() {
+        Handler().postDelayed({
+            showContentView()
+        }, 1000)
     }
 
     private fun initFragments() {

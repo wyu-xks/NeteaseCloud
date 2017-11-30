@@ -18,14 +18,13 @@ class WelfareFragment : BaseFragment() {
 //    lateinit var xrv_welfare: XRecyclerView
 
     var lists = ArrayList<String>()
+    var welfareAdapter = WelfareAdapter()
 
     override fun setLayout(): Int = R.layout.fragment_welfare
 
     override fun initView() {
 //        xrv_welfare = rootView.findViewById(R.id.xrv_welfare) as XRecyclerView
-        val welfareAdapter = WelfareAdapter()
         initList()
-        welfareAdapter.addAll(lists)
         xrv_welfare.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         xrv_welfare.adapter = welfareAdapter
         xrv_welfare.setPullRefreshEnabled(true)
@@ -44,6 +43,15 @@ class WelfareFragment : BaseFragment() {
         })
 
     }
+
+    override fun loadData() {
+        Handler().postDelayed({
+            welfareAdapter.addAll(lists)
+            welfareAdapter.notifyDataSetChanged()
+            showContentView()
+        }, 1000)
+    }
+
 
     private fun initList() {
         lists.add("http://218.17.157.212:9999/fog/test/image/jpeg/3f96bc0356bc08899f2ffd6ca859ffe4.jpg")
