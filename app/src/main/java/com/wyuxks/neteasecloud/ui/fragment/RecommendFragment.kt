@@ -16,13 +16,11 @@ import com.wyuxks.neteasecloud.ui.base.BaseFragment
 class RecommendFragment : BaseFragment() {
 
 
+    override fun setLayout(): Int = R.layout.fragment_recommend
 
-    override fun setLayout(): Int {
-        return  R.layout.fragment_recommend
-    }
 
     override fun initView() {
-        val xRecyclerView = rootView?.findViewById(R.id.xrv_recommend) as XRecyclerView
+//        val xRecyclerView = rootView?.findViewById(R.id.xrv_recommend) as XRecyclerView
 
     }
 }

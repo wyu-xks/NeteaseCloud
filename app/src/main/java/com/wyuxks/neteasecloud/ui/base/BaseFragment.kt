@@ -17,9 +17,13 @@ open abstract class BaseFragment : Fragment() {
     var rootView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = View.inflate(activity, R.layout.fragment_recommend, null)
-        initView()
+        rootView = View.inflate(activity, setLayout(), null)
         return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
     }
 
     abstract fun setLayout(): Int

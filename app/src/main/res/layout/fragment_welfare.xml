@@ -5,10 +5,10 @@
     >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <com.example.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_welfare"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="福利" />
+        android:layout_height="wrap_content"
+        />
 
 </FrameLayout>

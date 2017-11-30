@@ -13,12 +13,9 @@ import com.wyuxks.neteasecloud.ui.base.BaseFragment
  *  Des : 首页 安卓fragment
  */
 class AndroidFragment : BaseFragment() {
-    override fun setLayout(): Int {
-        return  R.layout.fragment_android
-    }
 
+    override fun setLayout(): Int = R.layout.fragment_android
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

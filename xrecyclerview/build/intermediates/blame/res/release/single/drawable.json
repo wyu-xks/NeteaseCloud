@@ -8,12 +8,12 @@
         "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
-        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\release\\drawable\\abc_ic_clear_material.xml",
-        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_ic_clear_material.xml"
-    },
-    {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_borderless_material.xml",
         "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\release\\drawable\\abc_ic_clear_material.xml",
+        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_ic_clear_material.xml"
     },
     {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_colored_material.xml",

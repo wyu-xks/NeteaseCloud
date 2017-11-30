@@ -14,11 +14,9 @@ import com.wyuxks.neteasecloud.ui.base.BaseFragment
  */
 class SolidFragment : BaseFragment() {
 
-    override fun setLayout(): Int {
-        return  R.layout.fragment_solid
-    }
+    override fun setLayout(): Int = R.layout.fragment_solid
+
 
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
