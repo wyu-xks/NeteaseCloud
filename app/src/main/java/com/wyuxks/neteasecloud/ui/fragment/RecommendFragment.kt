@@ -11,11 +11,25 @@ import com.example.xrecyclerview.XRecyclerView
 import com.huayuni.kotlinlearn.utils.e
 import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.R
+import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
+import com.wyuxks.neteasecloud.http.HttpUrls
+import com.wyuxks.neteasecloud.http.RetrofitClient
 import com.wyuxks.neteasecloud.ui.adapter.RecommendAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
 import com.wyuxks.neteasecloud.utils.findViewOften
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.fragment_recommend.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import rx.Observable
+import rx.Observer
+import rx.Scheduler
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 /**
  *  Author : xks
@@ -30,6 +44,7 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
     lateinit var ib_xiandu: ImageView
     lateinit var ib_movie_hot: ImageView
     lateinit var daily_btn: ImageView
+    lateinit var retrofit: Retrofit
 
     override fun setLayout(): Int = R.layout.fragment_recommend
     override fun initView() {
@@ -58,9 +73,7 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
         daily_btn.setOnClickListener(this)
         xrv_recommend.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onRefresh() {
-                Handler().postDelayed({
-                    xrv_recommend.refreshComplete()
-                }, 2000)
+                loadData()
             }
 
             override fun onLoadMore() {
@@ -93,12 +106,34 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun loadData() {
-        Handler().postDelayed({
-            showContentView()
-            recommendAdapter.addAll(lists)
-            recommendAdapter.notifyDataSetChanged()
-            xrv_recommend.visibility = View.VISIBLE
-            ll_loading.visibility = View.INVISIBLE
-        }, 1000)
+        retrofit = Retrofit.Builder()
+                .baseUrl(HttpUrls.TOP_MOVIES_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build()
+        val movies = retrofit.create(RetrofitClient::class.java)
+        val top250 = movies.getTop250Movies(0, 20)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<HotMovieBean> {
+                    override fun onError(e: Throwable?) {
+                    }
+
+                    override fun onNext(t: HotMovieBean?) {
+                        toast(context, "请求成功")
+                        val hotMovieBean = t
+                        e("result：" + hotMovieBean.toString())
+                        showContentView()
+                        recommendAdapter.addAll(lists)
+                        recommendAdapter.notifyDataSetChanged()
+                        xrv_recommend.visibility = View.VISIBLE
+                        ll_loading.visibility = View.INVISIBLE
+                        xrv_recommend.refreshComplete()
+                    }
+
+                    override fun onCompleted() {
+                    }
+
+                })
     }
 }

@@ -37,7 +37,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
-                        android:text="干货闲读"
+                        android:text="@string/banner_item1"
                         android:textColor="@color/colorContent"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="每日推荐"
+                        android:text="@string/banner_item2"
                         android:textColor="@color/colorContent"
                         android:textSize="12sp" />
 
@@ -114,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:text="电影热映"
+                        android:text="@string/banner_item3"
                         android:textColor="@color/colorContent"
                         android:textSize="12sp" />
                 </LinearLayout>

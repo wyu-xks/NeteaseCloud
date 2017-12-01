@@ -48,10 +48,10 @@ class LeftFragment : BaseFragment() {
     }
 
     private fun initFragments() {
-        titles.add("推荐")
-        titles.add("福利")
-        titles.add("干货")
-        titles.add("安卓")
+        titles.add(getString(R.string.recommend))
+        titles.add(getString(R.string.welfare))
+        titles.add(getString(R.string.solid))
+        titles.add(getString(R.string.android))
 
         fragmentList.add(RecommendFragment())
         fragmentList.add(WelfareFragment())
