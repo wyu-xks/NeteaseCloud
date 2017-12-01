@@ -11,7 +11,7 @@ import java.util.ArrayList
  */
 abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerViewHolder<T>>() {
 
-    protected var data: MutableList<T> = ArrayList<T>()
+    var data: MutableList<T> = ArrayList<T>()
 //    protected lateinit var listener: AdapterView.OnItemClickListener<T>
 
     override fun onBindViewHolder(holder: BaseRecyclerViewHolder<T>, position: Int) {

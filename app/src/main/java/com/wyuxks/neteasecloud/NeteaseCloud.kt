@@ -8,11 +8,17 @@ import android.app.Application
  *  Des :
  */
 class NeteaseCloud : Application() {
+
+    private object Holder { val INSTANCE = NeteaseCloud() }
     companion object {
-        fun get(): NeteaseCloud = Instance.instance
+        val instance: NeteaseCloud by lazy { Holder.INSTANCE }
     }
 
-    private object Instance {
-        val instance = NeteaseCloud()
-    }
+//    companion object {
+//        fun get(): NeteaseCloud = Instance.instance
+//    }
+//
+//    private object Instance {
+//        val instance = NeteaseCloud()
+//    }
 }
