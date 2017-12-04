@@ -1,15 +1,15 @@
 [
     {
-        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\common_progress_cirle.xml",
-        "source": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\bundles\\debug\\res\\drawable\\common_progress_cirle.xml"
+        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_text_cursor_material.xml",
+        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_text_cursor_material.xml"
     },
     {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_edit_text_material.xml",
         "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
-        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_text_cursor_material.xml",
-        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_text_cursor_material.xml"
+        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\common_progress_cirle.xml",
+        "source": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\bundles\\debug\\res\\drawable\\common_progress_cirle.xml"
     },
     {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_check_material.xml",

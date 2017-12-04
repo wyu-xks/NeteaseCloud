@@ -6,28 +6,20 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import com.example.xrecyclerview.XRecyclerView
 import com.huayuni.kotlinlearn.utils.e
 import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
-import com.wyuxks.neteasecloud.http.HttpUrls
+import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
 import com.wyuxks.neteasecloud.ui.adapter.RecommendAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
 import com.wyuxks.neteasecloud.utils.findViewOften
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.fragment_recommend.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import rx.Observable
 import rx.Observer
-import rx.Scheduler
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -63,8 +55,6 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
         xrv_recommend.adapter = recommendAdapter
         xrv_recommend.setPullRefreshEnabled(true)
         initEvent()
-
-
     }
 
     private fun initEvent() {
@@ -106,34 +96,34 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun loadData() {
-        retrofit = Retrofit.Builder()
-                .baseUrl(HttpUrls.TOP_MOVIES_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build()
-        val movies = retrofit.create(RetrofitClient::class.java)
-        val top250 = movies.getTop250Movies(0, 20)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<HotMovieBean> {
-                    override fun onError(e: Throwable?) {
-                    }
-
+        HttpManager.instance.getDBRetrofit()?.create(RetrofitClient::class.java)?.getTop250(0, 20)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Observer<HotMovieBean> {
                     override fun onNext(t: HotMovieBean?) {
-                        toast(context, "请求成功")
-                        val hotMovieBean = t
-                        e("result：" + hotMovieBean.toString())
-                        showContentView()
-                        recommendAdapter.addAll(lists)
-                        recommendAdapter.notifyDataSetChanged()
-                        xrv_recommend.visibility = View.VISIBLE
-                        ll_loading.visibility = View.INVISIBLE
-                        xrv_recommend.refreshComplete()
+                        loadDataSuccess(t)
                     }
 
+                    override fun onError(e: Throwable?) {
+                        showError()
+                    }
                     override fun onCompleted() {
+
                     }
 
                 })
+
+    }
+
+    fun loadDataSuccess(t: HotMovieBean?) {
+        toast(context, "请求成功")
+        val hotMovieBean = t
+        e("result：" + hotMovieBean.toString())
+        showContentView()
+        recommendAdapter.addAll(lists)
+        recommendAdapter.notifyDataSetChanged()
+        xrv_recommend.visibility = View.VISIBLE
+        ll_loading.visibility = View.INVISIBLE
+        xrv_recommend.refreshComplete()
     }
 }

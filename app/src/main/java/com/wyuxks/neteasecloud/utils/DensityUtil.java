@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import com.wyuxks.neteasecloud.NeteaseCloud;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Created by Administrator on 2015/10/19.
  */
@@ -21,7 +24,7 @@ public class DensityUtil {
     }
 
 
-    public static int dip2px(Context context,float dpValue) {
+    public static int dip2px(Context context, float dpValue) {
         NeteaseCloud neteaseCloud = NeteaseCloud.Companion.getInstance();
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
@@ -79,4 +82,18 @@ public class DensityUtil {
         view.requestLayout();
         return marginParams;
     }
+
+    public static void px2dip(Byte byt) {
+        ArrayList<Byte> arrayList = new ArrayList<>();
+        arrayList.add(byt);
+        Collections.sort(arrayList);
+        int i = 0;
+        byte[] bytes = new byte[arrayList.size() + 2];
+        bytes[i++] = (byte) (arrayList.size() + 1);
+        bytes[i++] = (byte) 0x04;
+        for (Byte bt : arrayList) {
+            bytes[i++] = bt;
+        }
+    }
+
 }

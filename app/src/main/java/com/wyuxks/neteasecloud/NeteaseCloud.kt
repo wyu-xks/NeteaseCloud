@@ -15,10 +15,10 @@ class NeteaseCloud : Application() {
     }
 
 //    companion object {
-//        fun get(): NeteaseCloud = Instance.instance
+//        fun get(): NeteaseCloud = Instance.INSTANCE
 //    }
 //
 //    private object Instance {
-//        val instance = NeteaseCloud()
+//        val INSTANCE = NeteaseCloud()
 //    }
 }

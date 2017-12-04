@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
-        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_spinner_textfield_background_material.xml"
-    },
-    {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml",
         "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_spinner_textfield_background_material.xml"
     },
     {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
@@ -24,12 +24,12 @@
         "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_ic_voice_search_api_material.xml"
     },
     {
-        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
-        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
-    },
-    {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
         "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\DELL\\.android\\build-cache\\afc9dbcc19cdb952b05591b7dacf3d9f3d88b18e\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
         "merged": "D:\\AndroidProject\\NeteaseCloud\\xrecyclerview\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
