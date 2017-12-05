@@ -17,11 +17,11 @@
             android:orientation="vertical">
 
             <ImageView
-                android:src="@drawable/b_1"
+                android:src="@drawable/img_two_bi_one"
                 android:id="@+id/iv_two_one_one"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
 
             <!--android:background="@drawable/img_two_bi_one"-->
 
@@ -50,11 +50,11 @@
             android:orientation="vertical">
 
             <ImageView
-                android:src="@drawable/b_2"
+                android:src="@drawable/img_two_bi_one"
                 android:id="@+id/iv_two_one_two"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/tv_two_one_two_title"

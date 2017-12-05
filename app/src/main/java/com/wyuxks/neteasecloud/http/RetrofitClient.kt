@@ -2,6 +2,7 @@ package com.wyuxks.neteasecloud.http
 
 import com.wyuxks.neteasecloud.bean.BannerBean
 import com.wyuxks.neteasecloud.bean.GankIoDataBean
+import com.wyuxks.neteasecloud.bean.GankIoDayBean
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import retrofit2.Call
 import retrofit2.http.*
@@ -40,6 +41,14 @@ interface RetrofitClient{
      */
     @GET("banner/qryBannerList")
     fun getBnanerData(): Observable<BannerBean>
+
+
+    /**
+     * 每日数据： http://gank.io/api/day/年/月/日
+     * eg:http://gank.io/api/day/2015/08/06
+     */
+    @GET("day/{year}/{month}/{day}")
+    fun getGankIoDay(@Path("year") year: String, @Path("month") month: String, @Path("day") day: String): Observable<GankIoDayBean>
 
 
 }

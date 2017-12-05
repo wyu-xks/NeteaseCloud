@@ -6,17 +6,21 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.xrecyclerview.XRecyclerView
 import com.huayuni.kotlinlearn.utils.e
 import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.BannerBean
+import com.wyuxks.neteasecloud.bean.GankIoDayBean
+import com.wyuxks.neteasecloud.bean.ItemBean
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
 import com.wyuxks.neteasecloud.ui.adapter.RecommendAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
 import com.wyuxks.neteasecloud.ui.image.GlideImageLoader
+import com.wyuxks.neteasecloud.utils.Utils
 import com.wyuxks.neteasecloud.utils.findViewOften
 import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerClickListener
@@ -35,22 +39,23 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
 
 
     var recommendAdapter = RecommendAdapter()
-    var lists = ArrayList<Int>()
     var banner: Banner? = null
     lateinit var ib_xiandu: ImageView
     lateinit var ib_movie_hot: ImageView
     lateinit var daily_btn: ImageView
+    lateinit var tv_daily_text: TextView
     var bannerImages: MutableList<String> = ArrayList()
+    lateinit var todayTimes: ArrayList<String>
 
     override fun setLayout(): Int = R.layout.fragment_recommend
     override fun initView() {
-        initList()
         initBanner()
         val header = LayoutInflater.from(context).inflate(R.layout.header_item_recommend, null)
         banner = header.findViewOften<Banner>(R.id.banner)
         ib_xiandu = header.findViewOften<ImageView>(R.id.ib_xiandu)
         ib_movie_hot = header.findViewOften<ImageView>(R.id.ib_movie_hot)
         daily_btn = header.findViewOften<ImageView>(R.id.daily_btn)
+        tv_daily_text = header.findViewOften<TextView>(R.id.tv_daily_text)
         xrv_recommend.addHeaderView(header)
         xrv_recommend.layoutManager = LinearLayoutManager(context)
         // 需加，不然滑动不流畅
@@ -59,6 +64,8 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
         xrv_recommend.itemAnimator = DefaultItemAnimator()
         xrv_recommend.adapter = recommendAdapter
         xrv_recommend.setPullRefreshEnabled(true)
+        todayTimes = Utils.getTodayTime()
+        tv_daily_text.text = todayTimes.get(2)
         initEvent()
         loadData()
     }
@@ -109,6 +116,8 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
 
     }
 
+
+
     private fun initEvent() {
         ib_xiandu.setOnClickListener(this)
         ib_movie_hot.setOnClickListener(this)
@@ -121,6 +130,7 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
             override fun onLoadMore() {
                 Handler().postDelayed({
                     xrv_recommend.refreshComplete()
+                    xrv_recommend.noMoreLoading()
                 }, 2000)
             }
         })
@@ -134,25 +144,12 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
         }
     }
 
-    private fun initList() {
-        lists.add(1)
-        lists.add(2)
-        lists.add(1)
-        lists.add(3)
-        lists.add(1)
-        lists.add(2)
-        lists.add(1)
-        lists.add(4)
-        lists.add(1)
-        lists.add(3)
-    }
-
     override fun loadData() {
-        HttpManager.instance.getDBRetrofit()?.create(RetrofitClient::class.java)?.getTop250(0, 20)
+        HttpManager.instance.getGIRetrofit()?.create(RetrofitClient::class.java)?.getGankIoDay(todayTimes.get(0), todayTimes.get(1), todayTimes.get(2))
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe(object : Observer<HotMovieBean> {
-                    override fun onNext(t: HotMovieBean?) {
+                ?.subscribe(object : Observer<GankIoDayBean> {
+                    override fun onNext(t: GankIoDayBean?) {
                         loadDataSuccess(t)
                     }
 
@@ -168,15 +165,13 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
 
     }
 
-    fun loadDataSuccess(t: HotMovieBean?) {
-        toast(context, "请求成功")
-        val hotMovieBean = t
-        e("result：" + hotMovieBean.toString())
+    fun loadDataSuccess(t: GankIoDayBean?) {
+        recommendAdapter.setData(t)
+        e("result：" + t.toString())
         showContentView()
-        recommendAdapter.addAll(lists)
-        recommendAdapter.notifyDataSetChanged()
         xrv_recommend.visibility = View.VISIBLE
         ll_loading.visibility = View.INVISIBLE
         xrv_recommend.refreshComplete()
     }
+
 }
