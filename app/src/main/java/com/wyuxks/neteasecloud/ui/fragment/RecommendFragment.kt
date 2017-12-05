@@ -10,13 +10,16 @@ import com.example.xrecyclerview.XRecyclerView
 import com.huayuni.kotlinlearn.utils.e
 import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.R
+import com.wyuxks.neteasecloud.bean.BannerBean
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
 import com.wyuxks.neteasecloud.ui.adapter.RecommendAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
+import com.wyuxks.neteasecloud.ui.image.GlideImageLoader
 import com.wyuxks.neteasecloud.utils.findViewOften
 import com.youth.banner.Banner
+import com.youth.banner.listener.OnBannerClickListener
 import kotlinx.android.synthetic.main.fragment_recommend.*
 import retrofit2.Retrofit
 import rx.Observer
@@ -28,19 +31,21 @@ import rx.schedulers.Schedulers
  *  Data : 2017/11/21 0021
  *  Des : 首页 推荐fragment
  */
-class RecommendFragment : BaseFragment(), View.OnClickListener {
+class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickListener {
+
 
     var recommendAdapter = RecommendAdapter()
     var lists = ArrayList<Int>()
-    lateinit var banner: Banner
+    var banner: Banner? = null
     lateinit var ib_xiandu: ImageView
     lateinit var ib_movie_hot: ImageView
     lateinit var daily_btn: ImageView
-    lateinit var retrofit: Retrofit
+    var bannerImages: MutableList<String> = ArrayList()
 
     override fun setLayout(): Int = R.layout.fragment_recommend
     override fun initView() {
         initList()
+        initBanner()
         val header = LayoutInflater.from(context).inflate(R.layout.header_item_recommend, null)
         banner = header.findViewOften<Banner>(R.id.banner)
         ib_xiandu = header.findViewOften<ImageView>(R.id.ib_xiandu)
@@ -55,6 +60,53 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
         xrv_recommend.adapter = recommendAdapter
         xrv_recommend.setPullRefreshEnabled(true)
         initEvent()
+        loadData()
+    }
+
+    private fun initBanner() {
+        HttpManager.instance.getNTRetrofit()?.create(RetrofitClient::class.java)?.getBnanerData()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : Observer<BannerBean> {
+                    override fun onNext(t: BannerBean?) {
+                        if (t?.retCode == 0) {
+                            bannerImages.clear()
+                            t?.data?.forEach {
+                                bannerImages.add(it.bannerurl)
+                            }
+                            startBanner()
+                        }
+                    }
+
+                    override fun onCompleted() {
+                    }
+
+                    override fun onError(e: Throwable?) {
+                    }
+                })
+
+    }
+
+    private fun startBanner() {
+        banner?.isAutoPlay(true)
+                ?.setImageLoader(GlideImageLoader())
+                ?.setImages(bannerImages)
+                ?.setDelayTime(4000)
+                ?.start()
+                ?.setOnBannerClickListener(this)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (userVisibleHint) {
+            banner?.start()
+        } else {
+            banner?.stopAutoPlay()
+        }
+    }
+
+    override fun OnBannerClick(position: Int) {
+
     }
 
     private fun initEvent() {
@@ -107,6 +159,7 @@ class RecommendFragment : BaseFragment(), View.OnClickListener {
                     override fun onError(e: Throwable?) {
                         showError()
                     }
+
                     override fun onCompleted() {
 
                     }

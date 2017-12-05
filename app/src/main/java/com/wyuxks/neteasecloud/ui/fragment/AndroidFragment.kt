@@ -17,6 +17,7 @@ class AndroidFragment : BaseFragment() {
 
     override fun setLayout(): Int = R.layout.fragment_android
     override fun initView() {
+        loadData()
     }
 
     override fun loadData() {

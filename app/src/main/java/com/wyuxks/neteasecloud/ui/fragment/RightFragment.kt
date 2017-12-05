@@ -20,6 +20,7 @@ class RightFragment : BaseFragment() {
     }
 
     override fun initView() {
+        loadData()
     }
 
     override fun loadData() {

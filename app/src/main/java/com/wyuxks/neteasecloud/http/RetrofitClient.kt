@@ -1,5 +1,6 @@
 package com.wyuxks.neteasecloud.http
 
+import com.wyuxks.neteasecloud.bean.BannerBean
 import com.wyuxks.neteasecloud.bean.GankIoDataBean
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import retrofit2.Call
@@ -32,5 +33,13 @@ interface RetrofitClient{
      */
     @GET("data/{type}/{pre_page}/{page}")
     fun getGankIoData(@Path("type") id: String, @Path("page") page: Int, @Path("pre_page") pre_page: Int): Observable<GankIoDataBean>
+
+    /**
+     * 轮播图
+     * eg: http://gank.io/api/data/Android/10/1
+     */
+    @GET("banner/qryBannerList")
+    fun getBnanerData(): Observable<BannerBean>
+
 
 }

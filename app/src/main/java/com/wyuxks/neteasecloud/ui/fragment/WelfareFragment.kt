@@ -60,10 +60,9 @@ class WelfareFragment : BaseFragment() {
                 loadMore()
             }
         })
-
+        loadData()
 
     }
-
 
     override fun loadData() {
         page = 1

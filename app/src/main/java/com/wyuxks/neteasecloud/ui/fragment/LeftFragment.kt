@@ -38,13 +38,11 @@ class LeftFragment : BaseFragment() {
         tab_left.tabMode = TabLayout.MODE_FIXED
         tab_left.setupWithViewPager(vp_left)
         myFragmentPagerAdapter.notifyDataSetChanged()
-
+        loadData()
     }
 
     override fun loadData() {
-        Handler().postDelayed({
-            showContentView()
-        }, 1000)
+        showContentView()
     }
 
     private fun initFragments() {

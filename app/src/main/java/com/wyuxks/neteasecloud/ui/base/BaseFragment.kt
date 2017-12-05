@@ -34,7 +34,6 @@ open abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         animationDrawable = img_progress.drawable as AnimationDrawable
         if(!animationDrawable.isRunning){
             animationDrawable.start()
@@ -44,6 +43,7 @@ open abstract class BaseFragment : Fragment() {
             loadData()
         })
         childView.visibility = View.GONE
+        initView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -127,7 +127,7 @@ open abstract class BaseFragment : Fragment() {
     }
 
     private fun onVisible() {
-        loadData()
+//        loadData()
     }
 
     open fun loadData() {

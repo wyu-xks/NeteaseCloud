@@ -21,12 +21,14 @@ class HttpManager {
     val API_DOUBAN = "https://api.douban.com/"
     val API_GANKIO = "http://gank.io/api/"
     val API_DONGTING = "http://api.dongting.com/"
+    val API_NOTICE = "http://218.17.157.212:8888/star/"
 
     val DEFAULT_TIME_OUT = 5L  //超时时间 5s
     val DEFAULT_READ_TIME_OUT = 10L //读操作超时时间 10s
     var douBanRetrofit: Retrofit? = null
     var gankIoRetrofit: Retrofit? = null
     var dongTingRetrofit: Retrofit? = null
+    var noticeRetrofit: Retrofit? = null
     var builder: OkHttpClient.Builder
 
 
@@ -74,6 +76,12 @@ class HttpManager {
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(API_DONGTING)
+            .build()
+    fun getNTRetrofit(): Retrofit? = noticeRetrofit ?: Retrofit.Builder()
+            .client(builder.build())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(API_NOTICE)
             .build()
 
 }

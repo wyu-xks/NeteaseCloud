@@ -21,6 +21,7 @@ class SolidFragment : BaseFragment() {
 
 
     override fun initView() {
+        loadData()
     }
 
     override fun loadData() {

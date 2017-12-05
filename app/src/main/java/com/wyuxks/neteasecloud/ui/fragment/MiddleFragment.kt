@@ -21,6 +21,7 @@ class MiddleFragment : BaseFragment() {
 
 
     override fun initView() {
+        loadData()
     }
 
     override fun loadData() {
