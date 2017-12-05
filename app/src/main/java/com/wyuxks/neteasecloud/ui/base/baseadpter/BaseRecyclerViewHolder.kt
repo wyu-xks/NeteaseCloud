@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import com.wyuxks.neteasecloud.utils.DensityUtil
 import com.wyuxks.neteasecloud.utils.findViewOften
 
@@ -20,6 +21,15 @@ open abstract class BaseRecyclerViewHolder<T>(viewGroup: ViewGroup, layoutId: In
 //                ViewGroup.LayoutParams.WRAP_CONTENT)
 //        itemView.layoutParams = lp
 //    }
+
+     var listener: OnItemClickListener<T>? =null
+
+
+    fun setOnItemClickListener(listener: OnItemClickListener<T>?){
+        this.listener = listener
+    }
+
+
     fun <T : View> findView(viewId: Int): T {
         return itemView.findViewOften(viewId)
     }

@@ -11,11 +11,17 @@ import java.util.ArrayList
  */
 abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerViewHolder<T>>() {
 
-    var data: MutableList<T> = ArrayList<T>()
-//    protected lateinit var listener: AdapterView.OnItemClickListener<T>
+    var data: ArrayList<T> = ArrayList<T>()
+    open var listener: OnItemClickListener<T>?=null
+
+
 
     override fun onBindViewHolder(holder: BaseRecyclerViewHolder<T>, position: Int) {
-            holder.onBaseBindViewHolder(data.get(position), position)
+        holder.onBaseBindViewHolder(data.get(position), position)
+        if (listener != null) {
+            holder.setOnItemClickListener(listener)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -50,7 +56,6 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerVie
 //    fun setOnItemClickListener(listener: AdapterView.OnItemClickListener<T>) {
 //        this.listener = listener
 //    }
-
 
 
 }

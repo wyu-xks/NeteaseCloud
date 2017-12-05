@@ -1,8 +1,11 @@
 package com.wyuxks.neteasecloud.ui.fragment
 
+import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
+import android.widget.AdapterView
 import com.example.xrecyclerview.XRecyclerView
 import com.huayuni.kotlinlearn.utils.e
 import com.huayuni.kotlinlearn.utils.toast
@@ -11,8 +14,10 @@ import com.wyuxks.neteasecloud.bean.GankIoDataBean
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
+import com.wyuxks.neteasecloud.ui.activity.BigViewActivity
 import com.wyuxks.neteasecloud.ui.adapter.WelfareAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
+import com.wyuxks.neteasecloud.ui.base.baseadpter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_recommend.*
 import kotlinx.android.synthetic.main.fragment_welfare.*
 import rx.Observer
@@ -26,10 +31,7 @@ import rx.schedulers.Schedulers
  */
 class WelfareFragment : BaseFragment() {
 
-//    lateinit var xrv_welfare: XRecyclerView
-
-    var lists = ArrayList<String>()
-    var welfareAdapter = WelfareAdapter()
+    lateinit var welfareAdapter: WelfareAdapter
     var page = 1
 
     override fun setLayout(): Int = R.layout.fragment_welfare
@@ -37,20 +39,29 @@ class WelfareFragment : BaseFragment() {
     override fun initView() {
 //        xrv_welfare = rootView.findViewById(R.id.xrv_welfare) as XRecyclerView
         xrv_welfare.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        welfareAdapter = WelfareAdapter(object : OnItemClickListener<String> {
+            override fun onClick(t: String, position: Int) {
+                val bundle = Bundle()
+                bundle.putInt("position", position)//第几张
+                bundle.putStringArrayList("imageuri", welfareAdapter.data)
+                val intent = Intent(context, BigViewActivity::class.java)
+                intent.putExtras(bundle)
+                context.startActivity(intent)
+            }
+        })
         xrv_welfare.adapter = welfareAdapter
         xrv_welfare.setPullRefreshEnabled(true)
         xrv_welfare.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onRefresh() {
-                Handler().postDelayed({
-                    loadData()
-                }, 2000)
+                loadData()
             }
 
             override fun onLoadMore() {
                 loadMore()
-
             }
         })
+
+
     }
 
 
@@ -88,7 +99,7 @@ class WelfareFragment : BaseFragment() {
     }
 
     fun loadMore() {
-        HttpManager.instance.getGIRetrofit()?.create(RetrofitClient::class.java)?.getGankIoData(getString(R.string.welfare), page ++, HttpManager.per_page_more)
+        HttpManager.instance.getGIRetrofit()?.create(RetrofitClient::class.java)?.getGankIoData(getString(R.string.welfare), page++, HttpManager.per_page_more)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(object : Observer<GankIoDataBean> {
