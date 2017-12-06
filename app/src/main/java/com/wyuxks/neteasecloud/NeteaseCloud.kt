@@ -9,9 +9,16 @@ import android.app.Application
  */
 class NeteaseCloud : Application() {
 
-    private object Holder { val INSTANCE = NeteaseCloud() }
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+    }
+
+
     companion object {
-        val instance: NeteaseCloud by lazy { Holder.INSTANCE }
+        lateinit var instance: NeteaseCloud
+            private set
     }
 
 //    companion object {

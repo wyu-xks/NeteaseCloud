@@ -22,10 +22,10 @@ open abstract class BaseRecyclerViewHolder<T>(viewGroup: ViewGroup, layoutId: In
 //        itemView.layoutParams = lp
 //    }
 
-     var listener: OnItemClickListener<T>? =null
+    var listener: OnItemClickListener<T>? = null
 
 
-    fun setOnItemClickListener(listener: OnItemClickListener<T>?){
+    fun setOnItemClickListener(listener: OnItemClickListener<T>?) {
         this.listener = listener
     }
 

@@ -1,24 +1,33 @@
 package com.wyuxks.neteasecloud.ui.fragment
 
+import android.content.Intent
 import android.os.Handler
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.xrecyclerview.XRecyclerView
 import com.huayuni.kotlinlearn.utils.e
 import com.huayuni.kotlinlearn.utils.toast
+import com.wyuxks.neteasecloud.NeteaseCloud
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.BannerBean
+import com.wyuxks.neteasecloud.bean.EveryDayItemBean
 import com.wyuxks.neteasecloud.bean.GankIoDayBean
 import com.wyuxks.neteasecloud.bean.ItemBean
 import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
+import com.wyuxks.neteasecloud.http.rx.RxBus
+import com.wyuxks.neteasecloud.http.rx.RxBusBaseMessage
+import com.wyuxks.neteasecloud.http.rx.RxCodeConstants
+import com.wyuxks.neteasecloud.ui.activity.WebActivity
 import com.wyuxks.neteasecloud.ui.adapter.RecommendAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
+import com.wyuxks.neteasecloud.ui.base.baseadpter.OnItemClickListener
 import com.wyuxks.neteasecloud.ui.image.GlideImageLoader
 import com.wyuxks.neteasecloud.utils.Utils
 import com.wyuxks.neteasecloud.utils.findViewOften
@@ -117,7 +126,6 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
     }
 
 
-
     private fun initEvent() {
         ib_xiandu.setOnClickListener(this)
         ib_movie_hot.setOnClickListener(this)
@@ -138,10 +146,19 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.ib_xiandu -> toast(context.applicationContext, "干货闲读")
-            R.id.daily_btn -> toast(context.applicationContext, "每日推荐")
-            R.id.ib_movie_hot -> toast(context.applicationContext, "电影热映")
+            R.id.ib_xiandu -> startWebActivity(" https://gank.io/xiandu", "干货闲读")
+            R.id.daily_btn -> {}
+            R.id.ib_movie_hot -> RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, "电影")
         }
+    }
+
+    fun startWebActivity(url: String, title: String) {
+        val instance = NeteaseCloud.instance
+        val intent = Intent(instance, WebActivity::class.java)
+        intent.putExtra("url", url)
+        intent.putExtra("title", title)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        instance.startActivity(intent)
     }
 
     override fun loadData() {

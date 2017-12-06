@@ -1,5 +1,6 @@
 package com.wyuxks.neteasecloud.ui.adapter.viewholder
 
+import android.content.Intent
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,6 +9,7 @@ import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.NeteaseCloud
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.EveryDayItemBean
+import com.wyuxks.neteasecloud.ui.activity.WebActivity
 import com.wyuxks.neteasecloud.ui.base.baseadpter.BaseRecyclerViewHolder
 import com.wyuxks.neteasecloud.utils.DensityUtil
 import com.wyuxks.neteasecloud.utils.ImageUtils
@@ -34,8 +36,17 @@ class OneHolder(viewGroup: ViewGroup, layoutId: Int) : BaseRecyclerViewHolder<Ev
         }
 
         imageView.setOnClickListener({
-            toast(it.context, "one pic!")
+            startWebActivity(t?.contentLists[0].url, t?.contentLists[0].desc)
         })
+    }
+
+    fun startWebActivity(url: String, title: String) {
+        val instance = NeteaseCloud.instance
+        val intent = Intent(instance, WebActivity::class.java)
+        intent.putExtra("url", url)
+        intent.putExtra("title", title)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        instance.startActivity(intent)
     }
 
 }

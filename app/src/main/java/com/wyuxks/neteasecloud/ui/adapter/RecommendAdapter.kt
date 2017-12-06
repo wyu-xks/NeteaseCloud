@@ -11,6 +11,7 @@ import com.wyuxks.neteasecloud.ui.adapter.viewholder.TitleHolder
 import com.wyuxks.neteasecloud.ui.adapter.viewholder.TwoHolder
 import com.wyuxks.neteasecloud.ui.base.baseadpter.BaseRecyclerViewAdapter
 import com.wyuxks.neteasecloud.ui.base.baseadpter.BaseRecyclerViewHolder
+import com.wyuxks.neteasecloud.ui.base.baseadpter.OnItemClickListener
 
 /**
  * Created by jingbin on 2016/12/1.
@@ -24,6 +25,7 @@ class RecommendAdapter : BaseRecyclerViewAdapter<EveryDayItemBean>() {
     private val TYPE_TWO = 3// 二张图
     private val TYPE_THREE = 4// 三张图
     private val lists = ArrayList<EveryDayItemBean>()
+
 
     override fun getItemViewType(position: Int): Int {
         if (data.get(position).contentLists.size == 0) {

@@ -13,22 +13,29 @@ import com.wyuxks.neteasecloud.ui.base.BaseActivity
 import com.wyuxks.neteasecloud.utils.ImageUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.Toast
+import com.wyuxks.neteasecloud.http.rx.RxBus
+import com.wyuxks.neteasecloud.http.rx.RxCodeConstants
 import com.wyuxks.neteasecloud.ui.adapter.MyFragmentPagerAdapter
 import com.wyuxks.neteasecloud.ui.fragment.LeftFragment
 import com.wyuxks.neteasecloud.ui.fragment.MiddleFragment
 import com.wyuxks.neteasecloud.ui.fragment.RightFragment
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_left.*
+import rx.Subscription
+import rx.functions.Action1
 
 
 class MainActivity : BaseActivity(), View.OnClickListener {
 
     var mFragmentList = ArrayList<Fragment>()
+    lateinit var subscription: Subscription
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initNavView()
         initViewPager()
+        initRxBus()
 
     }
 
@@ -104,27 +111,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.iv_title_left -> {
-                iv_title_left.setSelected(true)
-                iv_title_middle.setSelected(false)
-                iv_title_right.setSelected(false)
-                vp_content.currentItem = 0
-            }
-            R.id.iv_title_middle -> {
-                iv_title_left.setSelected(false)
-                iv_title_middle.setSelected(true)
-                iv_title_right.setSelected(false)
-                vp_content.currentItem = 1
-            }
-            R.id.iv_title_right -> {
-                iv_title_left.setSelected(false)
-                iv_title_middle.setSelected(false)
-                iv_title_right.setSelected(true)
-                vp_content.currentItem = 2
-            }
-            R.id.left_menu -> {
-                dl_left.openDrawer(Gravity.START)
-            }
+            R.id.iv_title_left -> vp_content.currentItem = 0
+            R.id.iv_title_middle -> vp_content.currentItem = 1
+            R.id.iv_title_right -> vp_content.currentItem = 2
+            R.id.left_menu -> dl_left.openDrawer(Gravity.START)
         }
     }
 
@@ -140,11 +130,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         return true
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-    }
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             // 不退出程序，进入后台
@@ -152,5 +137,26 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    /**
+     * 每日推荐点击"更多"跳转
+     */
+    private fun initRxBus() {
+        subscription = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, String::class.java)
+                .subscribe(Action1 {
+                    when (it) {
+                        "电影" -> vp_content.currentItem = 1
+                        else -> {}
+                    }
+
+                })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!subscription.isUnsubscribed()) {
+            subscription.unsubscribe()
+        }
     }
 }

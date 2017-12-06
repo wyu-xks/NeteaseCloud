@@ -9,9 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.wyuxks.neteasecloud.R
+import com.wyuxks.neteasecloud.http.rx.RxBus
+import com.wyuxks.neteasecloud.http.rx.RxCodeConstants
 import com.wyuxks.neteasecloud.ui.adapter.MyFragmentPagerAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_left.*
+import rx.Subscription
+import rx.functions.Action1
 
 /**
  *  Author : xks
@@ -22,6 +26,7 @@ class LeftFragment : BaseFragment() {
 
     val titles = ArrayList<String>()
     val fragmentList = ArrayList<Fragment>()
+    lateinit var subscription: Subscription
 
     override fun setLayout(): Int {
         return R.layout.fragment_left
@@ -39,6 +44,7 @@ class LeftFragment : BaseFragment() {
         tab_left.setupWithViewPager(vp_left)
         myFragmentPagerAdapter.notifyDataSetChanged()
         loadData()
+        initRxBus()
     }
 
     override fun loadData() {
@@ -57,5 +63,34 @@ class LeftFragment : BaseFragment() {
         fragmentList.add(AndroidFragment())
 
 
+    }
+
+    /**
+     * 每日推荐点击"更多"跳转
+     */
+    private fun initRxBus() {
+        subscription = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, String::class.java)
+                .subscribe(Action1 {
+                    when (it) {
+                        "Android" -> vp_left.currentItem = 3
+                        "App" -> vp_left.currentItem = 2
+                        "iOS" -> vp_left.currentItem = 2
+                        "前端" -> vp_left.currentItem = 2
+                        "休息视频" -> vp_left.currentItem = 2
+                        "瞎推荐" -> vp_left.currentItem = 2
+                        "福利" -> vp_left.currentItem = 1
+                        "拓展资源" -> vp_left.currentItem = 2
+                        "干货" -> vp_left.currentItem = 2
+                        else -> vp_left.currentItem = 1
+                    }
+
+                })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!subscription.isUnsubscribed()) {
+            subscription.unsubscribe()
+        }
     }
 }

@@ -8,6 +8,8 @@ import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.NeteaseCloud
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.EveryDayItemBean
+import com.wyuxks.neteasecloud.http.rx.RxBus
+import com.wyuxks.neteasecloud.http.rx.RxCodeConstants
 import com.wyuxks.neteasecloud.ui.base.baseadpter.BaseRecyclerViewHolder
 import com.wyuxks.neteasecloud.utils.DensityUtil
 import com.wyuxks.neteasecloud.utils.ImageUtils
@@ -22,8 +24,8 @@ class TitleHolder(viewGroup: ViewGroup, layoutId: Int) : BaseRecyclerViewHolder<
         val more = findView<LinearLayout>(R.id.ll_title_more)
         val tv_title_type = findView<TextView>(R.id.tv_title_type)
         val iv_title_type = findView<ImageView>(R.id.iv_title_type)
-        tv_title_type.text = t?.title
-        iv_title_type.setImageResource(when (t?.title) {
+        tv_title_type.text = t.title
+        iv_title_type.setImageResource(when (t.title) {
             "Android" -> R.drawable.home_title_android
             "App" -> R.drawable.home_title_app
             "iOS" -> R.drawable.home_title_ios
@@ -35,7 +37,7 @@ class TitleHolder(viewGroup: ViewGroup, layoutId: Int) : BaseRecyclerViewHolder<
             else -> R.drawable.home_title_android
         })
         more.setOnClickListener({
-            toast(it.context, "更多!")
+            RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE, t.title)
         })
 //
     }

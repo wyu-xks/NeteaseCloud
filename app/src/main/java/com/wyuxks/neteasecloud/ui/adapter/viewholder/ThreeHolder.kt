@@ -1,5 +1,6 @@
 package com.wyuxks.neteasecloud.ui.adapter.viewholder
 
+import android.content.Intent
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -7,6 +8,7 @@ import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.NeteaseCloud
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.EveryDayItemBean
+import com.wyuxks.neteasecloud.ui.activity.WebActivity
 import com.wyuxks.neteasecloud.ui.base.baseadpter.BaseRecyclerViewHolder
 import com.wyuxks.neteasecloud.utils.ImageUtils
 
@@ -31,14 +33,23 @@ class ThreeHolder(viewGroup: ViewGroup, layoutId: Int) : BaseRecyclerViewHolder<
         two_title.text = t?.contentLists[1].desc
         three_title.text = t?.contentLists[2].desc
         one_imageView.setOnClickListener({
-            toast(it.context, "three_one pic!")
+            startWebActivity(t?.contentLists[0].url, t?.contentLists[0].desc)
         })
         two_imageView.setOnClickListener({
-            toast(it.context, "three_two pic!")
+            startWebActivity(t?.contentLists[1].url, t?.contentLists[1].desc)
         })
         three_imageView.setOnClickListener({
-            toast(it.context, "three_three pic!")
+            startWebActivity(t?.contentLists[2].url, t?.contentLists[2].desc)
         })
+    }
+
+    fun startWebActivity(url: String, title: String) {
+        val instance = NeteaseCloud.instance
+        val intent = Intent(instance, WebActivity::class.java)
+        intent.putExtra("url", url)
+        intent.putExtra("title", title)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        instance.startActivity(intent)
     }
 
 }
