@@ -30,22 +30,22 @@ class SolidHolder(var isAll: Boolean, viewGroup: ViewGroup, layoutId: Int) : Bas
         val ll_welfare_other = findView<LinearLayout>(R.id.ll_welfare_other)
         iv_all_welfare.visibility = if (t.type.equals("福利")) View.VISIBLE else View.GONE
         ll_welfare_other.visibility = if (t.type.equals("福利")) View.GONE else View.VISIBLE
-        tv_type.visibility = if (t.type.equals("福利")) View.GONE else View.VISIBLE
+        tv_type.visibility = if (t.type.equals("福利") || !isAll) View.GONE else View.VISIBLE
         tv_des.text = t.desc
         tv_who.text = t.who
         tv_time.text = t.publishedAt.substring(0..9)
-        tv_type.text = " · "+ t.type
+        tv_type.text = " · " + t.type
         if (t.type.equals("福利")) {
             ImageUtils.displayEspImage(t.url, iv_all_welfare, ImageUtils.GIRL_TYPE)
         }
         if (t.images != null && t.images.size > 0) {
             iv_pic.visibility = View.VISIBLE
             ImageUtils.displayGif(t.images[0], iv_pic)
-        }else{
+        } else {
             iv_pic.visibility = View.GONE
         }
         itemView.setOnClickListener({
-            startWebActivity(t.url,t.desc)
+            startWebActivity(t.url, t.desc)
         })
     }
 
