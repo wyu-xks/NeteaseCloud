@@ -70,7 +70,6 @@ class RecommendAdapter : BaseRecyclerViewAdapter<EveryDayItemBean>() {
         }
         clear()
         addAll(lists)
-        notifyDataSetChanged()
     }
 
     fun clearData() {

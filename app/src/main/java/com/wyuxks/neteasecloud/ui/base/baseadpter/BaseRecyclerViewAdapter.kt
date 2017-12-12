@@ -12,8 +12,7 @@ import java.util.ArrayList
 abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerViewHolder<T>>() {
 
     var data: ArrayList<T> = ArrayList<T>()
-    open var listener: OnItemClickListener<T>?=null
-
+    open var listener: OnItemClickListener<T>? = null
 
 
     override fun onBindViewHolder(holder: BaseRecyclerViewHolder<T>, position: Int) {
@@ -28,29 +27,36 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerVie
         return data.size
     }
 
+    fun getData(): List<T> = data
 
     fun addAll(data: List<T>) {
         this.data.addAll(data)
+        notifyDataSetChanged()
     }
 
     fun add(`object`: T) {
         data.add(`object`)
+        notifyDataSetChanged()
     }
 
     fun clear() {
         data.clear()
+        notifyDataSetChanged()
     }
 
     fun remove(`object`: T) {
         data.remove(`object`)
+        notifyDataSetChanged()
     }
 
     fun remove(position: Int) {
         data.removeAt(position)
+        notifyDataSetChanged()
     }
 
     fun removeAll(data: List<T>) {
         this.data.retainAll(data)
+        notifyDataSetChanged()
     }
 
 //    fun setOnItemClickListener(listener: AdapterView.OnItemClickListener<T>) {

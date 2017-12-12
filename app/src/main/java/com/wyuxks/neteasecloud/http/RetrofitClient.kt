@@ -37,7 +37,6 @@ interface RetrofitClient{
 
     /**
      * 轮播图
-     * eg: http://gank.io/api/data/Android/10/1
      */
     @GET("banner/qryBannerList")
     fun getBnanerData(): Observable<BannerBean>
@@ -49,6 +48,7 @@ interface RetrofitClient{
      */
     @GET("day/{year}/{month}/{day}")
     fun getGankIoDay(@Path("year") year: String, @Path("month") month: String, @Path("day") day: String): Observable<GankIoDayBean>
+
 
 
 }

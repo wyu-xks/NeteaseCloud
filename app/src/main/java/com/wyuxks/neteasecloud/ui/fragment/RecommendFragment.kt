@@ -87,7 +87,7 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
                     override fun onNext(t: BannerBean?) {
                         if (t?.retCode == 0) {
                             bannerImages.clear()
-                            t?.data?.forEach {
+                            t.data?.forEach {
                                 bannerImages.add(it.bannerurl)
                             }
                             startBanner()
@@ -175,7 +175,7 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
                     }
 
                     override fun onCompleted() {
-
+                        xrv_recommend.refreshComplete()
                     }
 
                 })
@@ -188,7 +188,6 @@ class RecommendFragment : BaseFragment(), View.OnClickListener, OnBannerClickLis
         showContentView()
         xrv_recommend.visibility = View.VISIBLE
         ll_loading.visibility = View.INVISIBLE
-        xrv_recommend.refreshComplete()
     }
 
 }

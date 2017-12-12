@@ -77,13 +77,11 @@ class WelfareFragment : BaseFragment() {
                             t?.results?.forEach {
                                 welfareAdapter.add(it.url)
                             }
-                            welfareAdapter.notifyDataSetChanged()
                             loadDataSuccess()
                         }
                     }
 
                     override fun onError(e: Throwable?) {
-                        xrv_welfare.refreshComplete()
                         showError()
 
                     }
@@ -108,7 +106,6 @@ class WelfareFragment : BaseFragment() {
                             t?.results?.forEach {
                                 welfareAdapter.add(it.url)
                             }
-                            welfareAdapter.notifyDataSetChanged()
                         } else {
                             xrv_welfare.noMoreLoading()
                         }

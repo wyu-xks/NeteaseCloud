@@ -1,15 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="干货" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment">
+
+        <com.example.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_solid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="4dp"
+            android:scrollbarThumbVertical="@color/tabBackground"
+            android:scrollbars="vertical" />
+
+    </FrameLayout>
 
 </RelativeLayout>
