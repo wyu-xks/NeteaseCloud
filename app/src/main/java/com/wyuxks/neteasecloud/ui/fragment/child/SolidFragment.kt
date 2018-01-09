@@ -1,12 +1,9 @@
-package com.wyuxks.neteasecloud.ui.fragment
+package com.wyuxks.neteasecloud.ui.fragment.child
 
-import android.os.Bundle
-import android.os.Handler
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.xrecyclerview.XRecyclerView
@@ -15,10 +12,9 @@ import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.GankIoDataBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
-import com.wyuxks.neteasecloud.ui.adapter.viewholder.SolidAdapter
+import com.wyuxks.neteasecloud.ui.adapter.SolidAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
 import com.wyuxks.neteasecloud.utils.findViewOften
-import kotlinx.android.synthetic.main.fragment_android.*
 import kotlinx.android.synthetic.main.fragment_solid.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
@@ -27,32 +23,34 @@ import rx.schedulers.Schedulers
 /**
  *  Author : xks
  *  Data : 2017/11/21 0021
- *  Des : 首页 安卓fragment
+ *  Des : 首页 干货fragment
  */
-class AndroidFragment : BaseFragment() {
+class SolidFragment : BaseFragment() {
 
-
-
-
-    var type = "Android"
+    var type = "all"
     var page = 1
-    override fun setLayout(): Int = R.layout.fragment_android
-    var solidAdapter = SolidAdapter(false)
+
+    override fun setLayout(): Int = R.layout.fragment_solid
+    var solidAdapter = SolidAdapter(true)
 
     override fun initView() {
-        xrv_android.layoutManager = LinearLayoutManager(context)
+
+        val header = LayoutInflater.from(context).inflate(R.layout.header_item_gank_custom, null)
+        xrv_solid.addHeaderView(header)
+        initHeader(header)
+        xrv_solid.layoutManager = LinearLayoutManager(context)
         // 需加，不然滑动不流畅
-        xrv_android.isNestedScrollingEnabled = false
-        xrv_android.setHasFixedSize(false)
-        xrv_android.itemAnimator = DefaultItemAnimator()
-        xrv_android.adapter = solidAdapter
-        xrv_android.setPullRefreshEnabled(true)
+        xrv_solid.isNestedScrollingEnabled = false
+        xrv_solid.setHasFixedSize(false)
+        xrv_solid.itemAnimator = DefaultItemAnimator()
+        xrv_solid.adapter = solidAdapter
+        xrv_solid.setPullRefreshEnabled(true)
         loadData()
         initEvent()
     }
 
     private fun initEvent() {
-        xrv_android.setLoadingListener(object : XRecyclerView.LoadingListener {
+        xrv_solid.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onRefresh() {
                 loadData()
             }
@@ -63,6 +61,13 @@ class AndroidFragment : BaseFragment() {
         })
     }
 
+
+    private fun initHeader(header: View) {
+        val title = header.findViewOften<TextView>(R.id.tx_name)
+        val select = header.findViewOften<LinearLayout>(R.id.ll_choose_catalogue)
+        select.setOnClickListener { toast(context, "点击了选择") }
+
+    }
 
     override fun loadData() {
         page = 1
@@ -79,7 +84,7 @@ class AndroidFragment : BaseFragment() {
                     }
 
                     override fun onCompleted() {
-                        xrv_android.refreshComplete()
+                        xrv_solid.refreshComplete()
                     }
 
                 })
@@ -96,7 +101,7 @@ class AndroidFragment : BaseFragment() {
                         if (t?.results?.size ?: -1 > 0) {
                             solidAdapter.addAll(t.results)
                         } else {
-                            xrv_android.noMoreLoading()
+                            xrv_solid.noMoreLoading()
                         }
 
                     }
@@ -106,7 +111,7 @@ class AndroidFragment : BaseFragment() {
                     }
 
                     override fun onCompleted() {
-                        xrv_android.refreshComplete()
+                        xrv_solid.refreshComplete()
                     }
 
                 })
@@ -118,5 +123,4 @@ class AndroidFragment : BaseFragment() {
         solidAdapter.clear()
         solidAdapter.addAll(t.results)
     }
-
 }

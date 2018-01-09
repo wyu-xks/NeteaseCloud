@@ -1,30 +1,15 @@
-package com.wyuxks.neteasecloud.ui.fragment
+package com.wyuxks.neteasecloud.ui.fragment.child
 
-import android.os.Bundle
-import android.os.Handler
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.example.xrecyclerview.XRecyclerView
-import com.huayuni.kotlinlearn.utils.e
-import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.GankIoDataBean
-import com.wyuxks.neteasecloud.bean.GankIoDayBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
-import com.wyuxks.neteasecloud.ui.adapter.RecommendAdapter
-import com.wyuxks.neteasecloud.ui.adapter.viewholder.SolidAdapter
+import com.wyuxks.neteasecloud.ui.adapter.SolidAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
-import com.wyuxks.neteasecloud.utils.findViewOften
-import kotlinx.android.synthetic.main.fragment_recommend.*
-import kotlinx.android.synthetic.main.fragment_solid.*
-import kotlinx.android.synthetic.main.fragment_welfare.*
+import kotlinx.android.synthetic.main.fragment_android.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -32,34 +17,32 @@ import rx.schedulers.Schedulers
 /**
  *  Author : xks
  *  Data : 2017/11/21 0021
- *  Des : 首页 干货fragment
+ *  Des : 首页 安卓fragment
  */
-class SolidFragment : BaseFragment() {
+class AndroidFragment : BaseFragment() {
 
-    var type = "all"
+
+
+
+    var type = "Android"
     var page = 1
-
-    override fun setLayout(): Int = R.layout.fragment_solid
-    var solidAdapter = SolidAdapter(true)
+    override fun setLayout(): Int = R.layout.fragment_android
+    var solidAdapter = SolidAdapter(false)
 
     override fun initView() {
-
-        val header = LayoutInflater.from(context).inflate(R.layout.header_item_gank_custom, null)
-        xrv_solid.addHeaderView(header)
-        initHeader(header)
-        xrv_solid.layoutManager = LinearLayoutManager(context)
+        xrv_android.layoutManager = LinearLayoutManager(context)
         // 需加，不然滑动不流畅
-        xrv_solid.isNestedScrollingEnabled = false
-        xrv_solid.setHasFixedSize(false)
-        xrv_solid.itemAnimator = DefaultItemAnimator()
-        xrv_solid.adapter = solidAdapter
-        xrv_solid.setPullRefreshEnabled(true)
+        xrv_android.isNestedScrollingEnabled = false
+        xrv_android.setHasFixedSize(false)
+        xrv_android.itemAnimator = DefaultItemAnimator()
+        xrv_android.adapter = solidAdapter
+        xrv_android.setPullRefreshEnabled(true)
         loadData()
         initEvent()
     }
 
     private fun initEvent() {
-        xrv_solid.setLoadingListener(object : XRecyclerView.LoadingListener {
+        xrv_android.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onRefresh() {
                 loadData()
             }
@@ -70,13 +53,6 @@ class SolidFragment : BaseFragment() {
         })
     }
 
-
-    private fun initHeader(header: View) {
-        val title = header.findViewOften<TextView>(R.id.tx_name)
-        val select = header.findViewOften<LinearLayout>(R.id.ll_choose_catalogue)
-        select.setOnClickListener { toast(context, "点击了选择") }
-
-    }
 
     override fun loadData() {
         page = 1
@@ -93,7 +69,7 @@ class SolidFragment : BaseFragment() {
                     }
 
                     override fun onCompleted() {
-                        xrv_solid.refreshComplete()
+                        xrv_android.refreshComplete()
                     }
 
                 })
@@ -110,7 +86,7 @@ class SolidFragment : BaseFragment() {
                         if (t?.results?.size ?: -1 > 0) {
                             solidAdapter.addAll(t.results)
                         } else {
-                            xrv_solid.noMoreLoading()
+                            xrv_android.noMoreLoading()
                         }
 
                     }
@@ -120,7 +96,7 @@ class SolidFragment : BaseFragment() {
                     }
 
                     override fun onCompleted() {
-                        xrv_solid.refreshComplete()
+                        xrv_android.refreshComplete()
                     }
 
                 })
@@ -132,4 +108,5 @@ class SolidFragment : BaseFragment() {
         solidAdapter.clear()
         solidAdapter.addAll(t.results)
     }
+
 }

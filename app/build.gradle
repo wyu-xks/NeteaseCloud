@@ -33,7 +33,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.youth.banner:banner:1.4.2'
-
+    compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'//retrofit
     compile 'com.google.code.gson:gson:2.8.0'//Gson 库
     //下面两个是RxJava 和RxAndroid

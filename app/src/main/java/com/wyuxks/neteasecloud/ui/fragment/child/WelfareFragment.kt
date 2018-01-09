@@ -1,24 +1,18 @@
-package com.wyuxks.neteasecloud.ui.fragment
+package com.wyuxks.neteasecloud.ui.fragment.child
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
-import android.widget.AdapterView
 import com.example.xrecyclerview.XRecyclerView
-import com.huayuni.kotlinlearn.utils.e
-import com.huayuni.kotlinlearn.utils.toast
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.bean.GankIoDataBean
-import com.wyuxks.neteasecloud.bean.movies.HotMovieBean
 import com.wyuxks.neteasecloud.http.HttpManager
 import com.wyuxks.neteasecloud.http.RetrofitClient
 import com.wyuxks.neteasecloud.ui.activity.BigViewActivity
 import com.wyuxks.neteasecloud.ui.adapter.WelfareAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
 import com.wyuxks.neteasecloud.ui.base.baseadpter.OnItemClickListener
-import kotlinx.android.synthetic.main.fragment_recommend.*
 import kotlinx.android.synthetic.main.fragment_welfare.*
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers

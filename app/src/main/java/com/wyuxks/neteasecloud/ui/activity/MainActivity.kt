@@ -144,7 +144,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
      */
     private fun initRxBus() {
         subscription = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, String::class.java)
-                .subscribe(Action1 {
+                .subscribe({
                     when (it) {
                         "电影" -> vp_content.currentItem = 1
                         else -> {}

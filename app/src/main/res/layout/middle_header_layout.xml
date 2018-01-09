@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/top_movies_rl"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_title"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dahuaxiyou" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@+id/iv_title"
+            android:text="@string/douban_top_movies"
+            android:textColor="@color/colorContent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="9dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@+id/iv_title"
+            android:background="@drawable/shape_bg_level"
+            android:text="从前现在过去了再不来~"
+            android:textColor="@color/colorTabText"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/home_arrow_right_gray" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="23dp"
+            android:background="@drawable/ic_cylinder" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热映榜"
+            android:textColor="@color/colorContent"
+            android:textSize="17sp" />
+    </LinearLayout>
+</LinearLayout>
+
+

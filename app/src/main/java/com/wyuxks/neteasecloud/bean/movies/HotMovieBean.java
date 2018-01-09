@@ -3,6 +3,7 @@ package com.wyuxks.neteasecloud.bean.movies;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class HotMovieBean implements Serializable {
     private int start;
     private int total;
     private String title;
-    private List<SubjectsBean> subjects;
+    private ArrayList<SubjectsBean> subjects;
 
     public int getCount() {
         return count;
@@ -29,7 +30,7 @@ public class HotMovieBean implements Serializable {
     public String getTitle() {
         return title;
     }
-    public List<SubjectsBean> getSubjects() {
+    public ArrayList<SubjectsBean> getSubjects() {
         return subjects;
     }
 
@@ -45,7 +46,7 @@ public class HotMovieBean implements Serializable {
         this.title = title;
     }
 
-    public void setSubjects(List<SubjectsBean> subjects) {
+    public void setSubjects(ArrayList<SubjectsBean> subjects) {
         this.subjects = subjects;
     }
 }

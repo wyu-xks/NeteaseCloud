@@ -1,13 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:scrollbarSize="4dp"
+    android:scrollbarThumbVertical="@color/tabBackground"
+    android:scrollbars="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <com.example.xrecyclerview.XRecyclerView
+        android:id="@+id/list_movies"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="middle_fragment" />
-
+        android:orientation="vertical" />
 </FrameLayout>
+

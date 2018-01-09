@@ -1,18 +1,17 @@
 package com.wyuxks.neteasecloud.ui.fragment
 
-import android.os.Bundle
-import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.wyuxks.neteasecloud.R
 import com.wyuxks.neteasecloud.http.rx.RxBus
 import com.wyuxks.neteasecloud.http.rx.RxCodeConstants
 import com.wyuxks.neteasecloud.ui.adapter.MyFragmentPagerAdapter
 import com.wyuxks.neteasecloud.ui.base.BaseFragment
+import com.wyuxks.neteasecloud.ui.fragment.child.AndroidFragment
+import com.wyuxks.neteasecloud.ui.fragment.child.RecommendFragment
+import com.wyuxks.neteasecloud.ui.fragment.child.SolidFragment
+import com.wyuxks.neteasecloud.ui.fragment.child.WelfareFragment
 import kotlinx.android.synthetic.main.fragment_left.*
 import rx.Subscription
 import rx.functions.Action1
@@ -70,7 +69,7 @@ class LeftFragment : BaseFragment() {
      */
     private fun initRxBus() {
         subscription = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, String::class.java)
-                .subscribe(Action1 {
+                .subscribe({
                     when (it) {
                         "Android" -> vp_left.currentItem = 3
                         "App" -> vp_left.currentItem = 2
