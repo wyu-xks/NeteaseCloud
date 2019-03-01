@@ -21,6 +21,7 @@ import com.wyuxks.neteasecloud.ui.fragment.MiddleFragment
 import com.wyuxks.neteasecloud.ui.fragment.RightFragment
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_left.*
+import kotlinx.android.synthetic.main.nav_header_drawer_layout_one.view.*
 import rx.Subscription
 import rx.functions.Action1
 
@@ -92,7 +93,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     private fun initNavView() {
         val headerView = nav_view.getHeaderView(0)
-        val avatar = headerView.findViewById(R.id.iv_avatar) as ImageView
+        val avatar = headerView.iv_avatar
+//        val avatar = headerView.findViewById(R.id.iv_avatar) as ImageView
         ImageUtils.displayCircle(avatar, R.drawable.ic_avatar)
         nav_view.setNavigationItemSelectedListener({
             when (it.itemId) {

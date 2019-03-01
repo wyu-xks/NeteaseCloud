@@ -10,13 +10,14 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import com.wyuxks.neteasecloud.R
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.fragment_base.view.*
 
 /**
  *  Author : xks
  *  Data : 2017/11/21 0021
  *  Des :
  */
-open abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
     lateinit var childView: View
     lateinit var rootView: View
@@ -24,18 +25,20 @@ open abstract class BaseFragment : Fragment() {
     // fragment是否显示了
     var mIsVisible: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = View.inflate(activity, R.layout.fragment_base, null)
         childView = View.inflate(activity, setLayout(), null)
-        val container = rootView.findViewById(R.id.container) as RelativeLayout
+        val container = rootView.container
         container.addView(childView)
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         animationDrawable = img_progress.drawable as AnimationDrawable
-        if(!animationDrawable.isRunning){
+        if (!animationDrawable.isRunning) {
             animationDrawable.start()
         }
         ll_error_refresh.setOnClickListener({

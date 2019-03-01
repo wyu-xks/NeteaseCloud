@@ -13,6 +13,7 @@ import com.wyuxks.neteasecloud.ui.fragment.child.RecommendFragment
 import com.wyuxks.neteasecloud.ui.fragment.child.SolidFragment
 import com.wyuxks.neteasecloud.ui.fragment.child.WelfareFragment
 import kotlinx.android.synthetic.main.fragment_left.*
+import kotlinx.android.synthetic.main.fragment_left.view.*
 import rx.Subscription
 import rx.functions.Action1
 
@@ -34,8 +35,8 @@ class LeftFragment : BaseFragment() {
     override fun initView() {
         initFragments()
         val myFragmentPagerAdapter = MyFragmentPagerAdapter(childFragmentManager, fragmentList, titles)
-        val tab_left = rootView?.findViewById(R.id.tab_left) as TabLayout
-        val vp_left = rootView?.findViewById(R.id.vp_left) as ViewPager
+        val tab_left = rootView.tab_left
+        val vp_left = rootView.vp_left
         vp_left.adapter = myFragmentPagerAdapter
         vp_left.currentItem = 0
         vp_left.offscreenPageLimit = 3

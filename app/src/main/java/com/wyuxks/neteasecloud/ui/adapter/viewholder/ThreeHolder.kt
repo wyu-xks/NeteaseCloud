@@ -29,17 +29,17 @@ class ThreeHolder(viewGroup: ViewGroup, layoutId: Int) : BaseRecyclerViewHolder<
         ImageUtils.displayRandom(3,0,0,one_imageView)
         ImageUtils.displayRandom(3,1,0,two_imageView)
         ImageUtils.displayRandom(3,1,0,three_imageView)
-        one_title.text = t?.contentLists[0].desc
-        two_title.text = t?.contentLists[1].desc
-        three_title.text = t?.contentLists[2].desc
+        one_title.text = t.contentLists[0].desc
+        two_title.text = t.contentLists[1].desc
+        three_title.text = t.contentLists[2].desc
         one_imageView.setOnClickListener({
-            startWebActivity(t?.contentLists[0].url, t?.contentLists[0].desc)
+            startWebActivity(t.contentLists[0].url, t.contentLists[0].desc)
         })
         two_imageView.setOnClickListener({
-            startWebActivity(t?.contentLists[1].url, t?.contentLists[1].desc)
+            startWebActivity(t.contentLists[1].url, t.contentLists[1].desc)
         })
         three_imageView.setOnClickListener({
-            startWebActivity(t?.contentLists[2].url, t?.contentLists[2].desc)
+            startWebActivity(t.contentLists[2].url, t.contentLists[2].desc)
         })
     }
 

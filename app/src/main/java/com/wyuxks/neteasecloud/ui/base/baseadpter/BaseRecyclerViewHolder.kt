@@ -13,7 +13,7 @@ import com.wyuxks.neteasecloud.utils.findViewOften
 /**
  * Created by jingbin on 2016/11/25
  */
-open abstract class BaseRecyclerViewHolder<T>(viewGroup: ViewGroup, layoutId: Int) : RecyclerView.ViewHolder(LayoutInflater.from(viewGroup.context).inflate(layoutId, null)) {
+abstract class BaseRecyclerViewHolder<T>(viewGroup: ViewGroup, layoutId: Int) : RecyclerView.ViewHolder(LayoutInflater.from(viewGroup.context).inflate(layoutId, null)) {
 
 
 //    init {

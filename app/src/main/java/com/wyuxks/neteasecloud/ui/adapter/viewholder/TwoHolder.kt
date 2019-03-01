@@ -26,13 +26,13 @@ class TwoHolder(viewGroup: ViewGroup, layoutId: Int) : BaseRecyclerViewHolder<Ev
 
         ImageUtils.displayRandom(2, 0, 0, one_imageView)
         ImageUtils.displayRandom(2, 1, 0, two_imageView)
-        one_title.text = t?.contentLists[0].desc
-        two_title.text = t?.contentLists[1].desc
+        one_title.text = t.contentLists[0].desc
+        two_title.text = t.contentLists[1].desc
         one_imageView.setOnClickListener({
-            startWebActivity(t?.contentLists[0].url, t?.contentLists[0].desc)
+            startWebActivity(t.contentLists[0].url, t.contentLists[0].desc)
         })
         two_imageView.setOnClickListener({
-            startWebActivity(t?.contentLists[1].url, t?.contentLists[1].desc)
+            startWebActivity(t.contentLists[1].url, t.contentLists[1].desc)
         })
     }
 

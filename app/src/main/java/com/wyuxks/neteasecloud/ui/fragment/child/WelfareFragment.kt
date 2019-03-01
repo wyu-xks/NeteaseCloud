@@ -40,7 +40,7 @@ class WelfareFragment : BaseFragment() {
                 bundle.putStringArrayList("imageuri", welfareAdapter.data)
                 val intent = Intent(context, BigViewActivity::class.java)
                 intent.putExtras(bundle)
-                context.startActivity(intent)
+                context?.startActivity(intent)
             }
         })
         xrv_welfare.adapter = welfareAdapter

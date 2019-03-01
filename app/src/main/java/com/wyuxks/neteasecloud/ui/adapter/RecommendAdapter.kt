@@ -57,14 +57,14 @@ class RecommendAdapter : BaseRecyclerViewAdapter<EveryDayItemBean>() {
             val itbean = EveryDayItemBean(it)
             lists.add(itbean)
             when (it) {
-                "Android" -> lists.add(EveryDayItemBean(it, t?.results.Android))
-                "App" -> lists.add(EveryDayItemBean(it, t?.results.App))
-                "iOS" -> lists.add(EveryDayItemBean(it, t?.results.iOS))
-                "前端" -> lists.add(EveryDayItemBean(it, t?.results.前端))
-                "休息视频" -> lists.add(EveryDayItemBean(it, t?.results.休息视频))
-                "瞎推荐" -> lists.add(EveryDayItemBean(it, t?.results.瞎推荐))
-                "福利" -> lists.add(EveryDayItemBean(it, t?.results.福利))
-                "拓展资源" -> lists.add(EveryDayItemBean(it, t?.results.拓展资源))
+                "Android" -> lists.add(EveryDayItemBean(it, t.results.Android))
+                "App" -> lists.add(EveryDayItemBean(it, t.results.App))
+                "iOS" -> lists.add(EveryDayItemBean(it, t.results.iOS))
+                "前端" -> lists.add(EveryDayItemBean(it, t.results.前端))
+                "休息视频" -> lists.add(EveryDayItemBean(it, t.results.休息视频))
+                "瞎推荐" -> lists.add(EveryDayItemBean(it, t.results.瞎推荐))
+                "福利" -> lists.add(EveryDayItemBean(it, t.results.福利))
+                "拓展资源" -> lists.add(EveryDayItemBean(it, t.results.拓展资源))
             }
 
         }

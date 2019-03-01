@@ -28,8 +28,8 @@ fun e(message: Any?) {
         Log.e(LOG_TAG, message.toString())
 }
 
-fun Any?.toast(context: Context, message: Any?) {
-    Toast.makeText(context.applicationContext, message.toString(), Toast.LENGTH_SHORT).show()
+fun Any?.toast(context: Context?, message: Any?) {
+    Toast.makeText(context?.applicationContext, message.toString(), Toast.LENGTH_SHORT).show()
 }
 
 

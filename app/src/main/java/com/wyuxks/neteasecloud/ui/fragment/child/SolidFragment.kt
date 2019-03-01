@@ -63,7 +63,7 @@ class SolidFragment : BaseFragment() {
 
 
     private fun initHeader(header: View) {
-        val title = header.findViewOften<TextView>(R.id.tx_name)
+//        val title = header.findViewOften<TextView>(R.id.tx_name)
         val select = header.findViewOften<LinearLayout>(R.id.ll_choose_catalogue)
         select.setOnClickListener { toast(context, "点击了选择") }
 
